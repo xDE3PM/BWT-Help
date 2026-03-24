@@ -46,18 +46,22 @@ You must have these tools installed and accessible from your system’s PATH:
 
 ## 🚀 How to Use
 
-### 1. Clone this repo & Edit the config file
+
+### 1. Clone the repository
 
 ```bash
-git clone https://github.com/xDE3PM/bwt-help.git
-cd bwt-help
+git clone https://github.com/xDE3PM/bwt-help.git && cd bwt-help
+```
 
-Then edit the config file:
+### 2. Edit the config file
 
+```bash
 config/example_config.py
+```
+
 ---
 
-### 2. Run installer
+### 3. Run installer
 
 ```bash
 python install.py
@@ -67,7 +71,7 @@ python install.py
 
 ---
 
-### 3. Run uploader
+### 4. Run uploader
 
 ```bash
 bwt-uploader "path/to/your/file"
@@ -75,7 +79,7 @@ bwt-uploader "path/to/your/file"
 
 ---
 
-### 4. Show help
+### 5. Show help
 
 ```bash
 bwt-uploader --help
