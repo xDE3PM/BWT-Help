@@ -46,12 +46,15 @@ You must have these tools installed and accessible from your system’s PATH:
 
 ## 🚀 How to Use
 
-### 1. Edit the config file
+### 1. Clone this repo & Edit the config file
 
 ```bash
-config/example_config.py
-```
+git clone https://github.com/xDE3PM/bwt-help.git
+cd bwt-help
 
+Then edit the config file:
+
+config/example_config.py
 ---
 
 ### 2. Run installer
