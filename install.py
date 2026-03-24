@@ -1,9 +1,18 @@
-
 import subprocess
 import sys
 import os
+import shutil
+
+
+def is_installed():
+    return shutil.which("bwt-uploader") is not None
+
 
 def install_package():
+    if is_installed():
+        print("'bwt-uploader' is already installed. Skipping installation.\n")
+        return
+
     try:
         print("Installing 'bwt-uploader'...")
         subprocess.check_call([sys.executable, "-m", "pip", "install", "bwt-uploader"])
