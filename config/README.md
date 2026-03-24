@@ -193,18 +193,6 @@ BBCODE_TEMPLATE = """
 
 ---
 
-✅ Tips
-
-Test with small files first
-
-Keep fallback hosts configured
-
-Avoid too many threads on low-end systems
-
-
-
----
-
 🚀 Done!
 
 You are ready to use the uploader.
