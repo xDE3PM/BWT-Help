@@ -3,53 +3,74 @@ import sys
 import os
 import shutil
 
+PACKAGE_NAME = "bwt-uploader"
+
 
 def is_installed():
-    return shutil.which("bwt-uploader") is not None
+    return shutil.which(PACKAGE_NAME) is not None
 
 
-def install_package():
-    if is_installed():
-        print("'bwt-uploader' is already installed. Skipping installation.\n")
-        return
-
+def install_or_upgrade():
     try:
-        print("Installing 'bwt-uploader'...")
-        subprocess.check_call([sys.executable, "-m", "pip", "install", "bwt-uploader"])
-        print("Installation completed.\n")
+        if is_installed():
+            choice = input(f"'{PACKAGE_NAME}' is already installed. Upgrade it? (y/n): ").strip().lower()
+            if choice != "y":
+                print("Skipping upgrade.\n")
+                return
+
+            print(f"Upgrading '{PACKAGE_NAME}'...")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", "--upgrade", PACKAGE_NAME])
+
+        else:
+            print(f"Installing '{PACKAGE_NAME}'...")
+            subprocess.check_call([sys.executable, "-m", "pip", "install", PACKAGE_NAME])
+
+        print("Done.\n")
+
     except subprocess.CalledProcessError as e:
-        print("Installation failed.")
+        print("Installation/Upgrade failed.")
         sys.exit(e.returncode)
 
 
+def get_config_path():
+    while True:
+        config_path = input("Enter config path: ").strip().strip('"')
+
+        if not config_path:
+            print("Config path cannot be empty.\n")
+            continue
+
+        if not os.path.exists(config_path):
+            print("File does not exist. Try again.\n")
+            continue
+
+        if not os.path.isfile(config_path):
+            print("Not a valid file. Try again.\n")
+            continue
+
+        return config_path
+
+
 def run_uploader(config_path):
-    if not config_path:
-        print("Config path cannot be empty.")
-        sys.exit(1)
-
-    if not os.path.exists(config_path):
-        print(f"Config file does not exist: {config_path}")
-        sys.exit(1)
-
-    if not os.path.isfile(config_path):
-        print(f"Invalid config file: {config_path}")
-        sys.exit(1)
-
     try:
-        print(f"Executing: bwt-uploader -C {config_path}")
-        subprocess.check_call(["bwt-uploader", "-C", config_path])
-        print("Execution completed successfully.")
+        print(f"\n🚀 Running: {PACKAGE_NAME} -C {config_path}\n")
+        subprocess.check_call([PACKAGE_NAME, "-C", config_path])
+        print("\nExecution completed successfully.")
+
     except FileNotFoundError:
-        print("Command 'bwt-uploader' not found.")
+        print(f"Command '{PACKAGE_NAME}' not found.")
         sys.exit(1)
+
     except subprocess.CalledProcessError as e:
-        print(f"bwt-uploader failed with exit code {e.returncode}.")
+        print(f"{PACKAGE_NAME} failed with exit code {e.returncode}.")
         sys.exit(e.returncode)
 
 
 def main():
-    install_package()
-    config_path = input("Enter config path: ").strip()
+    print("=== BWT Uploader Runner ===\n")
+
+    install_or_upgrade()
+    config_path = get_config_path()
     run_uploader(config_path)
 
 
