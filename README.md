@@ -61,7 +61,7 @@ config/example_config.py
 
 ---
 
-### 3. Run installer
+### 3. Run installer for install or Upgrade 
 
 ```bash
 python install.py
