@@ -1,6 +1,40 @@
 # 🚀 BWT-Uploader v1.0.9
 **Torrent Upload Assistant for BWTorrents.Tv**
 
+BWT-Uploader v1.0.9 – Release Notes
+
+---
+
+🚀 What’s New
+
+- DETAILED_BBCODE_TEMPLATE Added
+  Introduced a powerful new BBCode template system for more structured and visually appealing uploads.
+
+- Enhanced Customization Options
+  
+  - Customize Torrent Description DB Details
+  - Customize Media Info Quote section for better formatting and clarity
+
+---
+
+🛠 Improvements & Fixes
+
+- 🐞 Bug Fixes – Resolved multiple issues to ensure smoother operation
+- ⚡ Performance Improvements – Optimized overall speed and responsiveness
+
+---
+
+📌 Summary
+
+This update focuses on flexibility and customization, giving users more control over how torrent descriptions and media info are presented, along with improved stability and performance.
+
+---
+
+Version: v1.0.9
+Status: Stable Release
+
+
+
 Upload torrents with ease using this assistant CLI.
 
 **BWT-Uploader** is a powerful Python-based automation tool for uploading torrents to [BwTorrents](https://bwtorrents.tv). It automatically fetches metadata, handles MediaInfo, and generates BBCode descriptions — making the upload process fast and hassle-free.
