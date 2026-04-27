@@ -1,4 +1,4 @@
-# BWT-Uploader v1.1.0 – Released
+# BWT-Uploader v1.1.0
 
 ## 🚀 What's New
 - Added support for **Untouched DVDs (DVDInfo export)**
@@ -9,3 +9,6 @@
 ## 🛠 Improvements & Fixes
 - Fixed various bugs to improve stability
 - Enhanced overall performance for a smoother experience
+
+## ⚠️ Important Note
+- Configuration file needs to be updated/re-edited due to newly added options and changes
