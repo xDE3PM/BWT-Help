@@ -1,3 +1,16 @@
+# BWT-Uploader v1.1.1
+
+## 🚀 What's New
+- Added **auto-correction for title names** and **auto-building of titles**
+- Added support for **multiple BD/BDInfo disc uploads**
+- Updated **upload helpers**
+
+## 🛠 Improvements & Fixes
+- Various bug fixes
+- Improved overall performance
+
+---
+
 # BWT-Uploader v1.1.0
 
 ## 🚀 What's New
