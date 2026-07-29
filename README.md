@@ -7,6 +7,7 @@
 - Updated **upload helpers**
 
 ## 🛠 Improvements & Fixes
+- Fixed **y/n input issue on Linux & macOS**
 - Various bug fixes
 - Improved overall performance
 
