@@ -7,7 +7,7 @@ config = {
     # TMDb API key (used to fetch movie/TV metadata like title, poster, cast, etc.)
     # Get your API key here: https://www.themoviedb.org/settings/api
     "TMDb": {
-        "API_KEY": ""  # YOUR_TMDB_API_KEY
+        "API_KEY": ""  # YOUR_TMDB_API_KEY (Required)
     },
     
     # Include IMDb & TMDb information in the description (True/False)
@@ -34,13 +34,13 @@ config = {
 
     # Primary image hosting service
     # Options: Freeimage, Imgbb, Imageride, Lookmyimg, Onlyimg, PTScreen
-    "image_host": "Imageride",
+    "image_host": "Imageride", # (Required)
     
     # Fallback image hosts (used if primary fails)
-    "fallback_image_host": "Imgbb",
-    "fallback_image_host_2": "Freeimage",
+    "fallback_image_host": "Imgbb", # (Required)
+    "fallback_image_host_2": "Freeimage", # (Required)
 
-    # API keys for supported image hosts
+    # API keys for supported image hosts a (Required)
     # Only required for the hosts you actually use
     "image_host_api_key": {
         "Freeimage": "",   # YOUR_FREEIMAGE_API_KEY
@@ -61,8 +61,8 @@ config = {
         "announce_url": "https://bwtorrents.tv/announce.php",
 
         # Login credentials
-        "username": "",  # YOUR_USERNAME
-        "password": ""   # YOUR_PASSWORD
+        "username": "",  # YOUR_USERNAME (Required)
+        "password": ""   # YOUR_PASSWORD (optional if you use cookie : ~/.bwt-uploader/cookie/cookie.txt)
     },
 
     # BBCode Styling Configuration
@@ -113,7 +113,7 @@ BBCODE_TEMPLATE = """
 
 {screenshot_bbcode}
 
-[b][size=5][color=green][font=Courier New]....Enjoying & Keep Seeding....[/font][/color][/size][/b]
+[i][b][size=5][color=#00BFFF][font=Georgia]Enjoy the download and please keep seeding![/font][/color][/size][/b][/i]
 [/center]
 """
 
@@ -144,9 +144,9 @@ DETAILED_BBCODE_TEMPLATE = """
 [color=#FF9900][b]Runtime......:[/b][/color] {runtime}  
 [color=#FF9900][b]Category.....:[/b][/color] {category}  
 
-[color=#FF9900][b]Cast.........:[/b][/color] {cast}  
 [color=#FF9900][b]Director.....:[/b][/color] {director}  
 [color=#FF9900][b]Writers......:[/b][/color] {writers}  
+[color=#FF9900][b]Cast.........:[/b][/color] {cast}  
 
 [color=#FF9900][b]IMDb Rating..:[/b][/color] [b]{imdb_rating}/10[/b] {imdb_votes}  
 [color=#FF9900][b]TMDb Rating..:[/b][/color] [b]{tmdb_rating}/10[/b] {tmdb_votes}  
