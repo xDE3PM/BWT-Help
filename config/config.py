@@ -14,7 +14,7 @@ config = {
     "imdb_and_tmdb_info": True,
     
     # Directory where upload logs will be stored
-    "uploads_logs_directory": "", 
+    "uploads_logs_directory": "",  # Windows Users use : r"uploads_logs_directory"
     
     # Number of screenshots to capture from the video file
     "screenshots_number": 6,
