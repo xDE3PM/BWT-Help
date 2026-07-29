@@ -54,32 +54,31 @@ You must have these tools installed and accessible from your system’s PATH:
 
 ## 🚀 How to Use
 
-
-### 1. Clone the repository
+### 1. Install latest version
 
 ```bash
-git clone https://github.com/xDE3PM/bwt-help.git && cd bwt-help
+pip install bwt-uploader
 ```
 
-### 2. Edit the config file
+Or install a specific version:
 
 ```bash
-config/example_config.py
+pip install bwt-uploader==1.1.1
 ```
 
 ---
 
-### 3. Run the installer for installation or upgrade.
+### 2. Config set up
 
-```bash
-python install.py
+Edit the config file at:
+
 ```
-
-> Enter your config file path when prompted.
+~/.bwt-uploader/config.py
+```
 
 ---
 
-### 4. Run uploader
+### 3. Run uploader
 
 ```bash
 bwt-uploader "path/to/your/file"
@@ -90,7 +89,7 @@ bwt "path/to/your/file"
 ```
 ---
 
-### 5. Show help
+### 4. Show help
 
 ```bash
 bwt-uploader --help
