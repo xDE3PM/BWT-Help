@@ -8,6 +8,7 @@
 
 ## 🛠 Improvements & Fixes
 - Fixed **y/n input issue on Linux & macOS**
+- Fixed **IMDb API issue**
 - Various bug fixes
 - Improved overall performance
 
