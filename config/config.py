@@ -40,8 +40,8 @@ config = {
     "fallback_image_host": "Imgbb", # (Required)
     "fallback_image_host_2": "Freeimage", # (Required)
 
-    # API keys for supported image hosts a (Required)
-    # Only required for the hosts you actually use
+    # API keys (Required) for supported image hosts
+    # only needs the key for whichever host(s) you actually use, not all six
     "image_host_api_key": {
         "Freeimage": "",   # YOUR_FREEIMAGE_API_KEY
         "Imgbb": "",       # YOUR_IMGBB_API_KEY
@@ -62,7 +62,7 @@ config = {
 
         # Login credentials
         "username": "",  # YOUR_USERNAME (Required)
-        "password": ""   # YOUR_PASSWORD (optional if you use cookie : ~/.bwt-uploader/cookie/cookie.txt)
+        "password": ""   # YOUR_PASSWORD (optional only if you're using a cookie file at ~/.bwt-uploader/cookie/cookie.txt)
     },
 
     # BBCode Styling Configuration
