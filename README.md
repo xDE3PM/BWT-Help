@@ -2,7 +2,8 @@
 
 ## 🚀 What's New
 - Added **auto-correction for title names** and **auto-building of titles**
-- Added support for **multiple BD/BDInfo disc uploads**
+- Added support for **multiple BD/DVD disc uploads**
+- Now support **Python 8+**
 - Updated **upload helpers**
 
 ## 🛠 Improvements & Fixes
