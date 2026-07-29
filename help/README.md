@@ -46,7 +46,7 @@ Upload torrents with ease using this assistant CLI.
 
 You must have these tools installed and accessible from your system’s PATH:
 
-- [Python 3.10+](https://www.python.org/downloads/)
+- [Python 3.8+](https://www.python.org/downloads/)
 - [FFmpeg](https://ffmpeg.org/download.html)
 - [MediaInfo](https://mediaarea.net/en/MediaInfo)
 
