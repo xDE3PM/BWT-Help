@@ -1,4 +1,4 @@
-# config.py v1.1.0
+# config.py v1.1.2
 
 # MAIN CONFIGURATION
 
@@ -88,8 +88,8 @@ config = {
         
         # Section headers styling
         "sections": {
-            "general": "[b][color=green]★ General ★[/color][/b]",
-            "video": "[b][color=blue]★ Video Track ★[/color][/b]",
+            "general": "[b][color=#00FF7F]★ General ★[/color][/b]",
+            "video": "[b][color=#0080FF]★ Video Track ★[/color][/b]",
             "audio": "[b][color=orange]★ Audio Track ★[/color][/b]",
             "subtitle": "[b][color=teal]★ Subtitle ★[/color][/b]",
             "chapters": "[b][color=red]★ Chapters ★[/color][/b]"
