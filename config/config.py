@@ -16,6 +16,16 @@ config = {
     # Directory where upload logs will be stored
     "uploads_logs_directory": "",  # Windows Users use : r"uploads_logs_directory"
     
+    # Automatically build the BWT upload title from metadata (True/False)
+    # True  → generate a clean title using DB metadata and media tags
+    # False → use the raw file/folder name as the BWT title (no processing)
+    "auto_build_title": True,
+
+    # Include AKA (alternative title) in the BWT upload title (True/False)
+    # True  → append AKA to the title when one is available (e.g. "Title AKA Alt Title")
+    # False → never include AKA in the title
+    "aka_on_title": True,
+    
     # Number of screenshots to capture from the video file
     "screenshots_number": 6,
 
