@@ -1,5 +1,5 @@
 # config.example.py
-# BWT-Uploader Configuration File v1.1.3
+# BWT-Uploader Configuration File v1.1.4
 #
 # HOW TO INSTALL:
 #   bwt --config /path/to/config.example.py
