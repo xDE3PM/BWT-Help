@@ -108,15 +108,12 @@ bwt-uploader --help
 ## CLI Options
 
 ```
-usage: bwt-uploader [-h] [--config CONFIG] [--force-config] [--version]
-                    [--imdb IMDB] [--tmdb TMDB] [--category CATEGORY]
-                    [--freeleech] [--request] [--recommended]
-                    [--double-upload] [--no-tmdb] [--no-imdb-tmdb]
-                    [--no-youtube] [--piece-length N]
-                    [--dry-run] [--name NAME] [--output DIR]
-                    [--skip-screenshots] [--num-screenshots N]
-                    [--no-confirm] [--skip-screenshot-upload]
-                    [--year YEAR] [--imdb-api VER] [--proxy URL]
+usage: bwt-uploader [-h] [--config CONFIG] [--force-config] [--version] [--imdb ID] [--tmdb ID]
+                    [--year YEAR] [--no-tmdb] [--no-imdb-tmdb] [--no-youtube] [--imdb-api VER]
+                    [--service CODE] [--bwt-name NAME] [--group-tag TAG] [--category ID]
+                    [--freeleech] [--request] [--recommended] [--double-upload] [--piece-length N]
+                    [--skip-screenshots] [--num-screenshots N] [--skip-screenshot-upload]
+                    [--dry-run] [--output DIR] [--no-confirm] [--proxy URL]
                     [filepath]
 ```
 
@@ -126,27 +123,29 @@ usage: bwt-uploader [-h] [--config CONFIG] [--force-config] [--version]
 | `--config` | `-C` | Install a config file to `~/.bwt-uploader/config.py` |
 | `--force-config` | `-F` | Overwrite existing config without prompting |
 | `--version` | `-v` | Show version and exit |
-| `--imdb` | `-i` | IMDb ID or URL (e.g. `tt1375666` or full URL) |
-| `--tmdb` | `-t` | TMDb ID or URL (e.g. `27205` or full URL) |
+| `--imdb` | `-i` | IMDb ID or URL (e.g. `tt1375666`) |
+| `--tmdb` | `-t` | TMDb ID or URL (e.g. `27205`) |
+| `--year` | `-y` | Override the year used in the BWT name (e.g. `1999`) |
+| `--no-tmdb` | `-T` | Skip TMDb metadata fetch |
+| `--no-imdb-tmdb` | `-IT` | Skip all DB fetching; derive category from file audio language |
+| `--no-youtube` | `-Y` | Skip YouTube trailer lookup |
+| `--imdb-api` | — | IMDb API version: `v1` (IMDb GraphQL), `v2` (IMDbapi / tiffara) |
+| `--service` | `-s` | OTT service code for WEB content (e.g. `AMZN`, `NF`, `DSNP`, `HULU`, `ATVP`). Overrides the service tag auto-detected from the filename |
+| `--bwt-name` | `-bn` | Set the BWT torrent name directly (skips interactive name prompt) |
+| `--group-tag` | `-g` | Release group tag appended to the name (e.g. `-g DUS` → `Name-DUS`; use `-g none` for no tag) |
 | `--category` | `-c` | Category ID (e.g. `119`, `145`) |
 | `--freeleech` | `-f` | Force freeleech flag on this upload |
 | `--request` | `-r` | Mark as request fulfillment |
 | `--recommended` | `-R` | Mark as recommended upload |
 | `--double-upload` | `-d` | Enable double upload mode |
-| `--no-tmdb` | `-T` | Skip TMDb metadata fetch |
-| `--no-imdb-tmdb` | `-IT` | Skip all DB fetching; derive category from file audio language |
-| `--no-youtube` | `-Y` | Skip YouTube trailer lookup |
 | `--piece-length` | `-p` | Piece length as `2^n` (16–27); auto-selected if omitted |
-| `--dry-run` | `-D` | Run full pipeline but skip the actual upload |
-| `--name` | `-n` | Set the BWT torrent name directly (skips interactive name prompt) |
-| `--output` | `-o` | Override the upload output / log directory |
 | `--skip-screenshots` | `-S` | Skip screenshot generation and upload entirely |
 | `--num-screenshots` | `-N` | Number of screenshots to generate (overrides config value) |
-| `--no-confirm` | — | Auto-confirm all yes/no prompts (for scripted / non-interactive use) |
 | `--skip-screenshot-upload` | `-U` | Generate screenshots but skip uploading them to the image host |
-| `--year` | `-y` | Override the year used in the BWT name (e.g. `1999`) |
-| `--imdb-api` | — | IMDb API version: `v1`, `v2`, `v1+v2`, `v2+v1` |
-| `--proxy` | — | Proxy URL for all outbound requests (e.g. `socks5://127.0.0.1:1080`) |
+| `--dry-run` | `-D` | Run full pipeline but skip the actual upload |
+| `--output` | `-o` | Override the upload output / log directory |
+| `--no-confirm` | — | Auto-confirm all yes/no prompts (for scripted / non-interactive use) |
+| `--proxy` | — | Proxy URL for all outbound requests (e.g. `socks5://127.0.0.1:1080` or `http://user:pass@host:port`) |
 
 ### Examples
 
@@ -159,6 +158,9 @@ bwt /path/to/Bluray Disk/
 
 # Supply IMDb / TMDb IDs directly (skips auto-search)
 bwt -i tt1375666 -t 27205 /path/to/Movie.mkv
+
+# Override OTT service tag and release group
+bwt -s NF -g DUS /path/to/Movie.mkv
 
 # Use a proxy (useful when TMDb is blocked in your region)
 bwt --proxy socks5://127.0.0.1:1080 /path/to/Movie.mkv
@@ -181,23 +183,23 @@ When the auto-built upload name is displayed, you can answer **N** to enter corr
 
 ```
 Correction args (combine freely, e.g. -t 12345 --year 1998):
-  -i / --imdb   <id or url>   Re-fetch with a different IMDb ID / URL
-  -t / --tmdb   <id or url>   Re-fetch with a different TMDb ID / URL
-  --year        <year>        Override year  (e.g. 1999)
-  --title       <title>       Override movie/show title
-  --aka         <aka>         Set / replace AKA
-  --no-aka                    Remove AKA entirely
-  --res         <res>         Override resolution  (e.g. 1080p)
-  --hdr         <hdr>         Override HDR tag  (e.g. DV HDR)
-  --no-hdr                    Remove HDR tag
-  --audio       <audio>       Override audio tag  (e.g. DD+ 5.1)
-  --codec       <codec>       Override video codec tag
-  --source      <source>      Override source  (e.g. BluRay)
-  --edition     <edition>     Override edition
-  --service     <service>     Override streaming service tag
-  --tag         <group>       Override release group tag
-  -n / --name   <full name>   Replace the entire BWT name manually
-  -q / --quit                 Quit / exit uploader
+  -i  / --imdb      <id or url>   Re-fetch with a different IMDb ID / URL
+  -t  / --tmdb      <id or url>   Re-fetch with a different TMDb ID / URL
+  -y  / --year      <year>        Override year  (e.g. 1999)
+  -T  / --title     <title>       Override movie/show title
+  -a  / --aka       <aka>         Set / replace AKA
+  -A  / --no-aka                  Remove AKA entirely
+  -r  / --res       <res>         Override resolution  (e.g. 1080p)
+  -H  / --hdr       <hdr>         Override HDR tag  (e.g. DV HDR)
+  -nh / --no-hdr                  Remove HDR tag
+  -au / --audio     <audio>       Override audio tag  (e.g. DD+ 5.1)
+  -c  / --codec     <codec>       Override video codec tag
+  -src/ --source    <source>      Override source  (e.g. BluRay)
+  -e  / --edition   <edition>     Override edition
+  -s  / --service   <service>     Override streaming service tag
+  -g  / --group-tag <group>       Override release group tag (use "none" to remove tag)
+  -bn / --bwt-name  <full name>   Replace the entire BWT name manually
+  -q  / --quit                    Quit / exit uploader
 ```
 
 When you supply `-i` or `-t`, the missing ID is **automatically resolved** (IMDb → TMDb or TMDb → IMDb) and a confirmation panel shows both IDs and links before the metadata is re-fetched.
