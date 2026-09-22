@@ -1,109 +1,169 @@
-# config.py v1.1.2
+# config.example.py
+# BWT-Uploader Configuration File v1.1.3
+#
+# HOW TO INSTALL:
+#   bwt --config /path/to/config.example.py
+#   or copy manually to: ~/.bwt-uploader/config.py
+#
+# Created by -= DE3PM =-
 
+# ─────────────────────────────────────────────────────────────────────────────
 # MAIN CONFIGURATION
+# ─────────────────────────────────────────────────────────────────────────────
 
 config = {
-    
-    # TMDb API key (used to fetch movie/TV metadata like title, poster, cast, etc.)
-    # Get your API key here: https://www.themoviedb.org/settings/api
+
+    # ── TMDb ─────────────────────────────────────────────────────────────────
+    # TMDb API key (used to fetch movie/TV metadata: title, poster, cast, etc.)
+    # Get your key: https://www.themoviedb.org/settings/api
     "TMDb": {
-        "API_KEY": ""  # YOUR_TMDB_API_KEY (Required)
+        "API_KEY": ""           # YOUR_TMDB_API_KEY  (Required)
     },
-    
-    # Include IMDb & TMDb information in the description (True/False)
+
+    # ── Proxy ─────────────────────────────────────────────────────────────────
+    # HTTP/HTTPS or SOCKS5 proxy for all outbound TMDb (and IMDb) requests.
+    # Useful when the TMDb API is blocked in your region.
+    # Leave empty ("") or omit to disable.
+    #
+    # Examples:
+    #   "http://user:pass@proxy.example.com:8080"
+    #   "socks5://127.0.0.1:1080"
+    "proxy": "",
+
+    # ── IMDb API version ──────────────────────────────────────────────────────
+    # "v2"    → imdbapi   ( imdbapi tiffara.com)  [default]
+    # "v1"    → imdbinfo  (IMDb GraphQL / HTML scraping only)
+    # "v1+v2" → imdbinfo first, fall back to imdbapi on failure
+    # "v2+v1" → imdbapi  first, fall back to imdbinfo on failure
+    "imdb_api": "v2+v1",
+
+    # ── Update notification ───────────────────────────────────────────────────
+    # True  → print a notice at startup when a newer version is available
+    # False → suppress the notice (forced updates still apply regardless)
+    "update_notification": True,
+
+    # ── Metadata options ──────────────────────────────────────────────────────
+    # Include IMDb & TMDb info block in the torrent description (True/False)
     "imdb_and_tmdb_info": True,
-    
-    # Directory where upload logs will be stored
-    "uploads_logs_directory": "",  # Windows Users use : r"uploads_logs_directory"
-    
+
     # Automatically build the BWT upload title from metadata (True/False)
-    # True  → generate a clean title using DB metadata and media tags
-    # False → use the raw file/folder name as the BWT title (no processing)
+    # True  → generate a clean title using DB metadata + media tags
+    # False → use the raw file/folder name as-is (no processing)
     "auto_build_title": True,
 
     # Include AKA (alternative title) in the BWT upload title (True/False)
-    # True  → append AKA to the title when one is available (e.g. "Title AKA Alt Title")
-    # False → never include AKA in the title
+    # True  → append AKA when one is available  e.g. "Title AKA Alt Title"
+    # False → never include AKA
     "aka_on_title": True,
-    
-    # Number of screenshots to capture from the video file
+
+    # ── Logo ──────────────────────────────────────────────────────────────────
+    # Show the movie / TV series logo image in the description (True/False)
+    # True  → fetch the logo from TMDb and embed it above the poster
+    #         (only shown when a logo actually exists for the configured language)
+    # False → no logo (poster only)
+    "show_logo": True,
+
+    # Language code for the logo to fetch from TMDb (ISO 639-1, e.g. "en", "hi")
+    # Only a logo that exactly matches this language is used.
+    # If no logo exists for this language, NO logo is shown — there is no
+    # language-neutral fallback.  Default is "en".
+    "logo_language": "en",
+
+    # ── Paths ─────────────────────────────────────────────────────────────────
+    # Directory where upload logs and output files are stored
+    # Windows users: use a raw string  r"C:\Users\You\BWT-Uploader\Uploads"
+    "uploads_logs_directory": "",   # leave blank to use default ~/Downloads/BWT-Uploader/Uploads
+
+    # ── Screenshots ───────────────────────────────────────────────────────────
+    # Number of screenshots to capture from the video
     "screenshots_number": 6,
 
-    # Screenshot capture options
-    # Apply HDR -> SDR tonemap only for HDR sources
+    # Apply HDR → SDR tonemap for HDR sources before capturing (True/False)
     "tonemap_hdr": True,
-    # FFmpeg tonemap method/parameters (used when tonemap_hdr is enabled)
+
+    # FFmpeg tonemap method (used when tonemap_hdr is True)
     "hdr_method": "reinhard:desat=0",
-    # Extract frames from keyframes only
+
+    # Capture from keyframes only — faster but less accurate timestamps (True/False)
     "keyframes_only": True,
-    # PNG compression level (0-9)
+
+    # PNG compression level (0 = none / fastest, 9 = maximum / slowest)
     "compression_level": 6,
 
-    # Number of parallel threads for uploading screenshots
+    # ── Image hosting ─────────────────────────────────────────────────────────
+    # Number of parallel upload threads
     "upload_threads": 3,
 
-    # Primary image hosting service
+    # Primary image host
     # Options: Freeimage, Imgbb, Imageride, Lookmyimg, Onlyimg, PTScreen
-    "image_host": "Imageride", # (Required)
-    
-    # Fallback image hosts (used if primary fails)
-    "fallback_image_host": "Imgbb", # (Required)
-    "fallback_image_host_2": "Freeimage", # (Required)
+    "image_host": "",               # (Required)
 
-    # API keys (Required) for supported image hosts
-    # only needs the key for whichever host(s) you actually use, not all six
+    # Fallback hosts — used in order if the primary fails
+    "fallback_image_host": "",      # (Required)
+    "fallback_image_host_2": "",    # (Optional)
+
+    # API keys for image hosts
+    # Only fill in the keys for the hosts you actually use.
     "image_host_api_key": {
-        "Freeimage": "",   # YOUR_FREEIMAGE_API_KEY
-        "Imgbb": "",       # YOUR_IMGBB_API_KEY
-        "Imageride": "",   # YOUR_IMAGERIDE_API_KEY
-        "Lookmyimg": "",   # YOUR_LOOKMYIMG_API_KEY
-        "Onlyimg": "",     # YOUR_ONLYIMG_API_KEY
-        "PTScreen": ""     # YOUR_PTSCREEN_API_KEY
+        "Freeimage":  "",           # YOUR_FREEIMAGE_API_KEY
+        "Imgbb":      "",           # YOUR_IMGBB_API_KEY
+        "Imageride":  "",           # YOUR_IMAGERIDE_API_KEY
+        "Lookmyimg":  "",           # YOUR_LOOKMYIMG_API_KEY
+        "Onlyimg":    "",           # YOUR_ONLYIMG_API_KEY
+        "PTScreen":   "",           # YOUR_PTSCREEN_API_KEY
     },
 
-    # BWTorrents Tracker Configuration
-    
+    # ── BWTorrents tracker ────────────────────────────────────────────────────
     "BWTorrents": {
-        # Main site URL (alternatives available if down)
+        # Main site URL
         "base_url": "https://bwtorrents.tv",
 
-        # Tracker announce URL
+        # Tracker announce URL (used when creating .torrent files)
         "announce_url": "https://bwtorrents.tv/announce.php",
 
         # Login credentials
-        "username": "",  # YOUR_USERNAME (Required)
-        "password": ""   # YOUR_PASSWORD (optional only if you're using a cookie file at ~/.bwt-uploader/cookie/cookie.txt)
+        "username": "",             # YOUR_USERNAME  (Required)
+        "password": "",             # YOUR_PASSWORD  (optional if using a saved cookie)
     },
 
-    # BBCode Styling Configuration
-    
+    # ── BBCode styling ────────────────────────────────────────────────────────
     "bbcode": {
 
-        # Banner displayed above MediaInfo
+        # Banner image displayed above the MediaInfo block
         "mediainfo_banner": "[img]https://i.ibb.co/DfF7Pbt/Media-Info.png[/img]",
 
-        # Banner for BD/DVD info (if used)
+        # Banner for BDInfo output (Blu-ray disc uploads)
         "bdinfo_banner": "[img]https://i.ibb.co/npQd6NX/BDInfo.png[/img]",
+
+        # Banner for DVD info output
         "dvdinfo_banner": "[img]https://i.ibb.co/DD8cgDV0/DVDinfo.png[/img]",
-        
-        # Section headers styling
+
+        # Section header labels (BBCode — customise colours/fonts freely)
         "sections": {
-            "general": "[b][color=#00FF7F]★ General ★[/color][/b]",
-            "video": "[b][color=#0080FF]★ Video Track ★[/color][/b]",
-            "audio": "[b][color=orange]★ Audio Track ★[/color][/b]",
-            "subtitle": "[b][color=teal]★ Subtitle ★[/color][/b]",
-            "chapters": "[b][color=red]★ Chapters ★[/color][/b]"
+            "general": "[size=4][color=#00FF7F]★ General ★[/color][/size]",
+            "video": "[size=4][color=#00BFFF]★ Video Track ★[/color][/size]",
+            "audio": "[size=4][color=#FF6D00]★ Audio Track ★[/color][/size]",
+            "subtitle": "[size=4][color=#00E5C3]★ Subtitle ★[/color][/size]",
+            "chapters": "[size=4][color=#FF0000]★ Chapters ★[/color][/size]"
         },
     },
 }
 
 
+# ─────────────────────────────────────────────────────────────────────────────
 # MAIN DESCRIPTION TEMPLATE
-
+# ─────────────────────────────────────────────────────────────────────────────
+#
 # Default BBCode template for the torrent description.
-# NOTE:
-# You may customize the visual style and layout, but DO NOT remove the following placeholders:
-# {file_name}, {media_info}, {screenshot_bbcode}, etc.
+# Customise the visual style freely, but do NOT remove any {placeholders} —
+# they are substituted automatically by the description builder.
+#
+# Available placeholders:
+#   {detailed_info}      — rich metadata block (poster, cast, ratings, overview)
+#   {file_name}          — release name
+#   {info_banner}        — MediaInfo / BDInfo / DVDInfo banner image
+#   {media_info}         — full MediaInfo / BDInfo text output
+#   {screenshot_bbcode}  — uploaded screenshot BBCode tags
 
 BBCODE_TEMPLATE = """
 {detailed_info}
@@ -128,18 +188,37 @@ BBCODE_TEMPLATE = """
 """
 
 
-# DETAILED MOVIE INFO TEMPLATE (TMDb / IMDb)
-
-# This block generates rich metadata (poster, cast, ratings, overview)
-# and is injected into the main BBCODE_TEMPLATE using {detailed_info}
-# You may customize the visual style and layout, but DO NOT remove the following placeholders:
-# {title}, ({year}, {poster}, etc.
+# ─────────────────────────────────────────────────────────────────────────────
+# DETAILED MOVIE INFO TEMPLATE  (TMDb / IMDb metadata block)
+# ─────────────────────────────────────────────────────────────────────────────
+#
+# Injected into BBCODE_TEMPLATE via {detailed_info}.
+# Do NOT remove any {placeholders}.
+#
+# Available placeholders:
+#   {title}        — movie / show title
+#   {year}         — release year
+#   {poster}       — poster image URL
+#   {logo}         — logo image BBCode (empty string when show_logo=False or no logo found)
+#   {dblinks}      — IMDb + TMDb links
+#   {genres}       — genre list
+#   {release_date} — release date
+#   {runtime}      — runtime (e.g. 2h 15min)
+#   {category}     — BWT category name
+#   {director}     — director(s)
+#   {writers}      — writer(s)
+#   {cast}         — top cast members
+#   {imdb_rating}  — IMDb rating
+#   {imdb_votes}   — IMDb vote count
+#   {tmdb_rating}  — TMDb rating
+#   {tmdb_votes}   — TMDb vote count
+#   {overview}     — plot overview
 
 DETAILED_BBCODE_TEMPLATE = """
 [center]
 [font=Arial][size=6][color=#00BFFF][b][i]{title} ({year})[/i][/b][/color][/size][/font]
 
-
+{logo}
 [img]{poster}[/img]
 
 
@@ -148,21 +227,22 @@ DETAILED_BBCODE_TEMPLATE = """
 
 [center]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/center]
 
-[font=Courier New][size=4]
+[quote][pre][size=4]
 [color=#FF9900][b]Genre........:[/b][/color] {genres}  
-[color=#FF9900][b]Released.....:[/b][/color] {release_date}  
-[color=#FF9900][b]Runtime......:[/b][/color] {runtime}  
-[color=#FF9900][b]Category.....:[/b][/color] {category}  
+[color=#FF9900][b]Released.....:[/b][/color] {release_date}
+[color=#FF9900][b]Runtime......:[/b][/color] {runtime}
+[color=#FF9900][b]Category.....:[/b][/color] {category}
 
-[color=#FF9900][b]Director.....:[/b][/color] {director}  
-[color=#FF9900][b]Writers......:[/b][/color] {writers}  
-[color=#FF9900][b]Cast.........:[/b][/color] {cast}  
+[color=#FF9900][b]Director.....:[/b][/color] {director}
+[color=#FF9900][b]Writers......:[/b][/color] {writers}
+[color=#FF9900][b]Cast.........:[/color][/pre] [font=Courier New]{cast}[/font][/b][pre]
 
-[color=#FF9900][b]IMDb Rating..:[/b][/color] [b]{imdb_rating}/10[/b] {imdb_votes}  
-[color=#FF9900][b]TMDb Rating..:[/b][/color] [b]{tmdb_rating}/10[/b] {tmdb_votes}  
+[color=#FF9900][b]IMDb Rating..:[/color] {imdb_rating}/10[/b] {imdb_votes}
+[color=#FF9900][b]TMDb Rating..:[/color] {tmdb_rating}/10[/b] {tmdb_votes}
 
-[color=#00BFFF][b]Overview.....:[/b][/color] {overview}
-[/size][/font]
+[color=#00BFFF][b]Overview.....:[/color][/pre] [font=Courier New]{overview}[/font][/b]
+[/size]
+[/quote]
 
 [center]━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━[/center]
 """
