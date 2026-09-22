@@ -46,7 +46,7 @@ pip install bwt-uploader
 Or install a specific version:
 
 ```bash
-pip install bwt-uploader==1.1.3
+pip install bwt-uploader==1.1.4
 ```
 
 ---
