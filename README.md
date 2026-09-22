@@ -1,30 +1,25 @@
-# BWT-Uploader v1.1.1
+# BWT-Uploader v1.1.4
 
 ## 🚀 What's New
-- Added **auto-correction for title names** and **auto-building of titles**
-- Added support for **multiple BD/DVD disc uploads**
-- Now support **Python 8+**
-- Updated **upload helpers**
+
+- Added **new CLI options and commands** for improved control and flexibility.
+- Updated the **CLI interface** with additional options.
+- Run `bwt-uploader --help` or `bwt --help` to view all available options and commands.
+- Improved the overall workflow and usability.
 
 ## 🛠 Improvements & Fixes
-- Fixed **y/n input issue on Linux & macOS**
-- Fixed **IMDb API issue**
-- Various bug fixes
-- Improved overall performance
+
+- Fixed almost all known bugs.
+- Improved overall performance and stability.
+- Optimized various internal processes for a faster and smoother operation.
+- Improved error handling and reliability.
+- Added various other minor fixes and improvements.
+
+## ⚠️ Important Note
+
+- Run `bwt-uploader --help` or `bwt --help` to review the newly added CLI options and commands.
+- Existing configuration may need to be reviewed when upgrading from an older version.
 
 ---
 
-# BWT-Uploader v1.1.0
-
-## 🚀 What's New
-- Added support for **Untouched DVDs (DVDInfo export)**
-- Added support for **Untouched Blu-ray (BDInfo extract)**
-- Improved **Screenshot Generator command** for better efficiency
-- Added new **Screenshot capture options** for more flexibility
-
-## 🛠 Improvements & Fixes
-- Fixed various bugs to improve stability
-- Enhanced overall performance for a smoother experience
-
-## ⚠️ Important Note
-- Configuration file needs to be updated/re-edited due to newly added options and changes
+**BWT-Uploader v1.1.4** — Improved CLI, better stability, and a smoother upload workflow.
